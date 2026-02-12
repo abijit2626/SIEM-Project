@@ -11,6 +11,8 @@ This SIEM combines two advanced detection techniques:
 
 **Key Insight**: Beacon detection alone generates many false positives. This system only triggers incidents when beacons appear as part of a complete attack chain (access anomaly → C2 beacon → objective behavior).
 
+_For a technical deep dive into the algorithms, see [architecture_deep_dive.md](architecture_deep_dive.md)._
+
 ---
 
 ## 🏗️ Architecture

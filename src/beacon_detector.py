@@ -12,28 +12,32 @@ from models import Event
 import config
 
 
-def calculate_interval_regularity(intervals: List[float]) -> Tuple[float, float]:
+def calculate_interval_metrics(intervals: List[float]) -> Tuple[float, float, float]:
     """
-    Calculate mean and variance of time intervals.
+    Calculate mean, variance, and jitter (CV) of time intervals.
     
     Args:
         intervals: List of time intervals in seconds
         
     Returns:
-        Tuple of (mean_interval, variance)
+        Tuple of (mean_interval, variance, jitter)
     """
     if not intervals:
-        return 0.0, 0.0
+        return 0.0, 0.0, 0.0
     
     mean = sum(intervals) / len(intervals)
     
-    # Calculate variance
     if len(intervals) == 1:
-        variance = 0.0
-    else:
-        variance = sum((x - mean) ** 2 for x in intervals) / len(intervals)
+        return mean, 0.0, 0.0
+        
+    variance = sum((x - mean) ** 2 for x in intervals) / len(intervals)
     
-    return mean, variance
+    # Calculate Jitter (Coefficient of Variation)
+    # Jitter = StdDev / Mean
+    std_dev = variance ** 0.5
+    jitter = std_dev / mean if mean > 0 else 0.0
+    
+    return mean, variance, jitter
 
 
 def detect_beacons(events: List[Event]) -> List[Event]:
@@ -89,7 +93,7 @@ def detect_beacons(events: List[Event]) -> List[Event]:
             continue
         
         # Check for interval regularity
-        mean_interval, variance = calculate_interval_regularity(intervals)
+        mean_interval, variance, jitter = calculate_interval_metrics(intervals)
         
         # Skip if intervals too short (likely a burst, not beacon)
         if mean_interval < config.MIN_BEACON_INTERVAL:
@@ -114,6 +118,10 @@ def detect_beacons(events: List[Event]) -> List[Event]:
                         'beacon_pattern': True,
                         'mean_interval': round(mean_interval, 2),
                         'interval_variance': round(variance, 2),
+                        'connection_count': len(conn_events),
+                        'mean_interval': round(mean_interval, 2),
+                        'interval_variance': round(variance, 2),
+                        'jitter': round(jitter, 4),
                         'connection_count': len(conn_events),
                         'destination_ip': dest_ip
                     }
@@ -159,7 +167,9 @@ def format_beacon_summary(beacon_events: List[Event]) -> str:
             lines.append(f"\nEntity: {entity_id}")
             lines.append(f"  → Destination: {dest_ip}")
             lines.append(f"  → Connections: {count}")
+            lines.append(f"  → Connections: {count}")
             lines.append(f"  → Avg Interval: {mean_interval}s")
+            lines.append(f"  → Jitter: {sample.metadata.get('jitter', 0.0)}")
             lines.append(f"  → Pattern: Regular beacon detected")
     
     lines.append(f"{'='*60}\n")
