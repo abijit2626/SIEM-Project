@@ -1,0 +1,91 @@
+ATTACK CHAIN SIEM - Incident Report
+Generated: 2026-02-12T14:48:06.290504
+
+================================================================================
+INCIDENT DETECTED: INC_user_compromised_1770868800
+================================================================================
+Entity: user_compromised
+Confidence: 100.0%
+Duration: 420 seconds
+Time Range: 2026-02-12T11:00:00 → 2026-02-12T11:07:00
+
+ATTACK TIMELINE:
+--------------------------------------------------------------------------------
+1. [2026-02-12T11:00:00] Stage 1: ACCESS ANOMALY
+   Signal: access_anomaly
+   reason: Off-hours login from unusual location
+   source_ip: 185.220.101.47
+   time_of_day: 03:42
+   geo_location: Unknown/Proxy
+   user_agent: curl/7.68.0
+
+2. [2026-02-12T11:01:00] Stage 2: C2 BEACON
+   Signal: beacon_detected
+   destination_ip: 45.142.212.61
+   port: 443
+   bytes: 486
+   protocol: TCP
+   connection_type: HTTPS
+   beacon_pattern: True
+   mean_interval: 60.0
+   interval_variance: 0.0
+   connection_count: 5
+
+3. [2026-02-12T11:02:00] Stage 2: C2 BEACON
+   Signal: beacon_detected
+   destination_ip: 45.142.212.61
+   port: 443
+   bytes: 221
+   protocol: TCP
+   connection_type: HTTPS
+   beacon_pattern: True
+   mean_interval: 60.0
+   interval_variance: 0.0
+   connection_count: 5
+
+4. [2026-02-12T11:03:00] Stage 2: C2 BEACON
+   Signal: beacon_detected
+   destination_ip: 45.142.212.61
+   port: 443
+   bytes: 222
+   protocol: TCP
+   connection_type: HTTPS
+   beacon_pattern: True
+   mean_interval: 60.0
+   interval_variance: 0.0
+   connection_count: 5
+
+5. [2026-02-12T11:04:00] Stage 2: C2 BEACON
+   Signal: beacon_detected
+   destination_ip: 45.142.212.61
+   port: 443
+   bytes: 475
+   protocol: TCP
+   connection_type: HTTPS
+   beacon_pattern: True
+   mean_interval: 60.0
+   interval_variance: 0.0
+   connection_count: 5
+
+6. [2026-02-12T11:05:00] Stage 2: C2 BEACON
+   Signal: beacon_detected
+   destination_ip: 45.142.212.61
+   port: 443
+   bytes: 467
+   protocol: TCP
+   connection_type: HTTPS
+   beacon_pattern: True
+   mean_interval: 60.0
+   interval_variance: 0.0
+   connection_count: 5
+
+7. [2026-02-12T11:07:00] Stage 3: OBJECTIVE
+   Signal: objective
+   action: Large data transfer
+   destination_ip: 45.142.212.61
+   bytes: 524288000
+   file_accessed: /var/db/customer_data.db
+   port: 443
+
+================================================================================
+
