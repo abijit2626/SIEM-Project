@@ -43,3 +43,6 @@ venv.bak/
 
 # Logs
 *.log
+
+# Generated at runtime by src/storage.py
+*.db

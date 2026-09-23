@@ -67,8 +67,7 @@ Events → Beacon Detector → State Tracker → Correlator → Incidents
 ### Quick Start
 
 ```bash
-# Run the complete pipeline
-cd c:\Users\user\Desktop\Projects\SIEM
+# Run the complete pipeline, from the repository root
 python src/main.py
 ```
 
@@ -133,7 +132,7 @@ Uses **interval regularity analysis** instead of ML:
 3. Check variance against threshold
 4. Require minimum connection count
 
-**Interview advantage**: You can explain exactly why something was flagged as a beacon.
+**Why this matters**: an analyst can be told exactly why something was flagged as a beacon, which is what makes an alert triageable.
 
 ### 4. No False Confidence
 
@@ -147,7 +146,7 @@ Uses **interval regularity analysis** instead of ML:
 - ✅ Demonstrates advanced correlation concepts
 - ✅ Shows understanding of attack patterns
 - ✅ Clean, maintainable code
-- ✅ Interview-ready talking points
+- ✅ Explainable, auditable detection decisions
 
 ---
 
@@ -188,9 +187,9 @@ This system generates **1 incident** when all three correlate for the same entit
 
 ---
 
-## 🎓 Interview Talking Points
+## 🎓 Design Q&A
 
-### When discussing this project:
+### Common questions about how this works:
 
 1. **"Why stateful correlation?"**
    - Reduces false positives by requiring full attack context
@@ -265,9 +264,9 @@ attack_chain_siem/
 
 ---
 
-## 🎯 Learning Outcomes
+## 🎯 What This Project Covers
 
-By building this project, you demonstrate:
+Concepts worked through while building it:
 - ✅ Understanding of attack progression (cyber kill chain)
 - ✅ Stateful system design
 - ✅ Temporal correlation logic
@@ -286,4 +285,4 @@ By building this project, you demonstrate:
 
 ---
 
-**Built with Python 🐍 | Interview-Ready 💼 | Production-Minded 🚀**
+**Built with Python 🐍 | Explainable by design | Production-minded 🚀**
